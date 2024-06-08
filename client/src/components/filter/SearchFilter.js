@@ -4,7 +4,7 @@ import { getProperties } from "../../utils/propertyData";
 const SearchFilter = ({ setProperties }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState({ type: "", location: "" });
-  const [showFilters, setShowFilters] = useState(false); // State to control filter visibility
+  const [showFilters, setShowFilters] = useState(false); 
 
   const handleSearch = async () => {
     try {
