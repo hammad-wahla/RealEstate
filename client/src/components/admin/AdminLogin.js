@@ -59,6 +59,16 @@ const AdminLogin = () => {
             Login
           </button>
         </form>
+        <div className="text-right mt-5">
+          <button
+            className="bg-black text-white px-4 text-sm py-2 rounded-md hover:bg-gray-600"
+            onClick={() => {
+              navigate("/admin/register");
+            }}
+          >
+            Register
+          </button>
+        </div>
       </div>
     </div>
   );
