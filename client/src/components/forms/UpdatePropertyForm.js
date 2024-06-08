@@ -65,7 +65,7 @@ const UpdatePropertyForm = ({ property, handleUpdateProperty, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-center items-center bg-gray-900 bg-opacity-50">
+    <div className="fixed inset-0 z-50 flex justify-center items-center bg-gray-900 px-3 bg-opacity-50">
       <div className="bg-white p-5 rounded-md shadow-lg w-[500px] h-[95vh]">
         <FaTimes className="ml-auto cursor-pointer" onClick={onClose} />
         <h2 className="text-2xl font-bold mb-4 text-center">Update Property</h2>

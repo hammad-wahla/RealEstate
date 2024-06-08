@@ -9,17 +9,17 @@ const PropertyPopup = ({ property, onClose }) => {
   const descriptionLines = property.description.split("\n");
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center overflow-hidden p-3 z-50">
       <div className="bg-white p-3 rounded-md shadow-lg max-w-2xl w-full relative pb-10">
         <FaTimes className="ml-auto cursor-pointer" onClick={onClose} />
         <div className="overflow-y-scroll px-3 h-[80vh]">
           <h2 className="text-2xl font-bold mb-4">{property.title}</h2>
-          <div className="mb-4 flex justify-center h-96">
+          <div className="mb-4 flex justify-center sm:h-96 h-[40%]">
             <Carousel showThumbs={false} showStatus={false}>
               {property.images.map((image, index) => (
                 <div key={index}>
                   <img
-                    className="h-96"
+                    className="sm:h-96 h-[40%] "
                     src={`${BASE_URL}/${image}`}
                     alt={`Property Image ${index + 1}`}
                   />

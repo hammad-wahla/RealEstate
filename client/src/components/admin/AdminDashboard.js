@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import PropertyList from "../properties/PropertyList";
 import { useNavigate } from "react-router-dom";
-import { FaHome, FaUser, FaCog, FaSignOutAlt } from "react-icons/fa";
+import { FaHome, FaUser, FaCog, FaSignOutAlt, FaBars } from "react-icons/fa";
 import { adminLogout } from "../../utils/adminData";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleLogout = async () => {
     try {
@@ -17,18 +18,22 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="flex">
-      <div className="w-[10%] bg-white shadow-lg min-h-screen p-5">
+    <div className="flex flex-col sm:flex-row min-h-screen">
+      <div
+        className={`bg-white shadow-lg text-sm sm:text-md p-5 transition-transform transform ${
+          sidebarOpen ? "translate-x-0" : "-translate-x-full sm:translate-x-0"
+        } sm:relative fixed sm:fixed  left-0 w-64 h-[100vh] z-20 sm:z-0`}
+      >
         <ul className="space-y-4 mb-10">
-          <li className="flex items-center space-x-2">
+          <li className="flex items-center space-x-2 cursor-pointer">
             <FaHome />
             <span>Home</span>
           </li>
-          <li className="flex items-center space-x-2">
+          <li className="flex items-center space-x-2 cursor-pointer">
             <FaUser />
             <span>Profile</span>
           </li>
-          <li className="flex items-center space-x-2">
+          <li className="flex items-center space-x-2 cursor-pointer">
             <FaCog />
             <span>Settings</span>
           </li>
@@ -41,13 +46,19 @@ const AdminDashboard = () => {
           <span>Logout</span>
         </div>
       </div>
-      <div className="w-[90%] p-5">
-        <div className="flex justify-between">
-          <h1 className="text-3xl font-bold mb-8">Admin Dashboard</h1>
-          <div className="mb-4"></div>
+
+      <div className="flex-1 p-1">
+        <div className="flex  items-center mb-8">
+          <button
+            className="sm:hidden w-[10%] text-2xl focus:outline-none"
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+          >
+            <FaBars />
+          </button>
+          <h1 className="text-3xl w-[90%] font-bold">Admin Dashboard</h1>
         </div>
         <hr />
-        <div className="mb-8 mt-5">
+        <div className="mt-5">
           <PropertyList />
         </div>
       </div>
