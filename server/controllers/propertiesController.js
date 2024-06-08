@@ -36,7 +36,8 @@ const getAllProperties = async (req, res) => {
     }
 
     if (location) {
-      query.location = new RegExp(location, "i");
+      const locationRegex = new RegExp(`\\b${location}\\b`, "i");
+      query.location = locationRegex;
     }
 
     const properties = await Property.find(query);

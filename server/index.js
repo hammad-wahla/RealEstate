@@ -27,8 +27,6 @@ try {
   if (!fs.existsSync(uploadsDir)) {
     fs.mkdirSync(uploadsDir, { recursive: true });
     console.log(`Created uploads directory at ${uploadsDir}`);
-  } else {
-    console.log(`Uploads directory already exists at ${uploadsDir}`);
   }
 } catch (error) {
   console.error(`Error creating uploads directory: ${error.message}`);
