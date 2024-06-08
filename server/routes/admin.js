@@ -41,6 +41,17 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.get("/", async (req, res) => {
+  try {
+    const admin = await Admin.find();
+    console.log(admin);
+    res.json(admin);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 router.post("/register", async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -48,8 +59,7 @@ router.post("/register", async (req, res) => {
     if (existingAdmin)
       return res.status(400).json({ message: "Admin already exists" });
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newAdmin = new Admin({ username, password: hashedPassword });
+    const newAdmin = new Admin({ username, password }); // Use plain-text password
     await newAdmin.save();
     res.status(201).json({ message: "Admin registered successfully" });
   } catch (err) {
@@ -69,6 +79,7 @@ router.get("/dashboard", auth, async (req, res) => {
   }
 });
 
+// routes/admin.js
 router.post("/logout", (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,

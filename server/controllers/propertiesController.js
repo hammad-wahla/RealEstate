@@ -26,8 +26,8 @@ const getAllProperties = async (req, res) => {
 
     if (search) {
       query.$or = [
-        { title: new RegExp(search, "i") },
-        { description: new RegExp(search, "i") },
+        { title: { $regex: new RegExp(search, "i") } },
+        { description: { $regex: new RegExp(search, "i") } },
       ];
     }
 

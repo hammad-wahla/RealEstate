@@ -129,88 +129,98 @@ const PropertyList = () => {
         />
       )}
       <div className="grid grid-cols-1 md:grid-cols-3 mt-8 gap-4">
-        {properties
-          .slice()
-          .reverse()
-          .map((property) => {
-            const descriptionLines = property.description.split("\n");
-            const showMoreButton = descriptionLines.length > 1;
+        {properties.length === 0 ? (
+          <p className="font-bold text-gray-700 text-2xl  mx-auto">
+            No properties found.
+          </p>
+        ) : (
+          properties
+            .slice()
+            .reverse()
+            .map((property) => {
+              const descriptionLines = property.description.split("\n");
+              const showMoreButton = descriptionLines.length > 1;
 
-            return (
-              <div
-                key={property._id}
-                className="bg-white shadow-lg p-4 relative border border-gray-200 "
-              >
-                {isAdminDashboard && (
-                  <div className="dropdown top-4 right-3 absolute">
-                    <button
-                      className="dropdown-toggle"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        toggleDropdown(property._id);
-                      }}
-                    >
-                      <FaEllipsisV />
-                    </button>
-                    {selectedPropertyId === property._id && (
-                      <div className="dropdown-menu flex flex-col gap-1 w-20 rounded-md shadow-md border border-gray-400 py-1 z-30 absolute bg-white right-0">
-                        <button
-                          className="dropdown-item p-1 hover:bg-gray-200"
-                          onClick={() => handleUpdate(property._id)}
-                        >
-                          Update
-                        </button>
-                        <button
-                          className="dropdown-item p-1 hover:bg-gray-200"
-                          onClick={() => handleDelete(property._id)}
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                )}
-                <h2 className="text-xl font-semibold mb-2">{property.title}</h2>
-                <div className="h-[200px] flex justify-center mb-2">
-                  <Carousel showThumbs={false} showStatus={false}>
-                    {property.images.map((image, index) => (
-                      <div key={index}>
-                        <img
-                          className="h-[200px]"
-                          src={`${BASE_URL}/${image}`}
-                          alt={`Property Image ${index + 1}`}
-                        />
-                      </div>
-                    ))}
-                  </Carousel>
-                </div>
+              return (
                 <div
-                  className="cursor-pointer"
-                  onClick={() => openPopup(property)}
+                  key={property._id}
+                  className="bg-white shadow-lg p-4 relative border border-gray-200 "
                 >
-                  <p className="text-gray-700 mb-2">
-                    {descriptionLines[0]}
-                    {showMoreButton && (
-                      <>
-                        {" ..."}
-                        <button
-                          onClick={() => openPopup(property)}
-                          className="text-black"
-                        >
-                          more
-                        </button>
-                      </>
-                    )}
-                  </p>
-                  <p className="text-lg text-gray-800 mb-2">
-                    {" "}
-                    Price: ${property.price}
-                  </p>
-                  <p className="text-gray-600">Location: {property.location}</p>
+                  {isAdminDashboard && (
+                    <div className="dropdown top-4 right-3 absolute">
+                      <button
+                        className="dropdown-toggle"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleDropdown(property._id);
+                        }}
+                      >
+                        <FaEllipsisV />
+                      </button>
+                      {selectedPropertyId === property._id && (
+                        <div className="dropdown-menu flex flex-col gap-1 w-20 rounded-md shadow-md border border-gray-400 py-1 z-30 absolute bg-white right-0">
+                          <button
+                            className="dropdown-item p-1 hover:bg-gray-200"
+                            onClick={() => handleUpdate(property._id)}
+                          >
+                            Update
+                          </button>
+                          <button
+                            className="dropdown-item p-1 hover:bg-gray-200"
+                            onClick={() => handleDelete(property._id)}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                  <h2 className="text-xl font-semibold mb-2">
+                    {property.title}
+                  </h2>
+                  <div className="h-[200px] flex justify-center mb-2">
+                    <Carousel showThumbs={false} showStatus={false}>
+                      {property.images.map((image, index) => (
+                        <div key={index}>
+                          <img
+                            className="h-[200px]"
+                            src={`${BASE_URL}/${image}`}
+                            alt={`Property Image ${index + 1}`}
+                          />
+                        </div>
+                      ))}
+                    </Carousel>
+                  </div>
+                  <div
+                    className="cursor-pointer"
+                    onClick={() => openPopup(property)}
+                  >
+                    <p className="text-gray-700 mb-2">
+                      {descriptionLines[0]}
+                      {showMoreButton && (
+                        <>
+                          {" ..."}
+                          <button
+                            onClick={() => openPopup(property)}
+                            className="text-black"
+                          >
+                            more
+                          </button>
+                        </>
+                      )}
+                    </p>
+                    <p className="text-lg text-gray-800 mb-2">
+                      {" "}
+                      Price: ${property.price}
+                    </p>
+                    <p className="text-gray-600">
+                      Location: {property.location}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })
+        )}
       </div>
       {showAddPropertyForm && (
         <AddPropertyForm

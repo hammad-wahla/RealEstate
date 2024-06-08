@@ -17,8 +17,10 @@ const SearchFilter = ({ setProperties }) => {
       if (searchTerm.trim() !== "") {
         const searchWords = searchTerm.trim().toLowerCase().split(/\s+/);
         properties = properties.filter((property) => {
-          return searchWords.every((word) =>
-            property.description.toLowerCase().includes(word)
+          return searchWords.every(
+            (word) =>
+              property.title.toLowerCase().includes(word) ||
+              property.description.toLowerCase().includes(word)
           );
         });
       }

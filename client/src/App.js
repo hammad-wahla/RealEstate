@@ -2,9 +2,11 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AdminLogin from "./components/admin/AdminLogin";
 import AdminDashboard from "./components/admin/AdminDashboard";
+
 import PropertyList from "./components/properties/PropertyList";
 import ProtectedRoute from "./components/protectedRoute/PrivateRoute";
 import Navbar from "./components/navbar/Navbar";
+import AdminRegister from "./components/admin/AdminRegister";
 
 const App = () => {
   return (
@@ -13,6 +15,7 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin/register" element={<AdminRegister />} />
           <Route
             path="/admin/dashboard"
             element={<ProtectedRoute element={AdminDashboard} />}
